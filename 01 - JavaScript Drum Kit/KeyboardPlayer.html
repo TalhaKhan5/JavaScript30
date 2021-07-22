@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyboardPlayer</title>
+    <style>
+        .paragraph {
+            margin: 2rem;
+            transition: color 0.5s, font 1s;
+            color: blue;
+            transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .pressed {
+            color: red;
+            font-size: x-large;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1 class="paragraph">Press K</h1>
+        <video controls src="On and On Status.mp4" preload="none">No Audio</video>
+        <br/>
+        <h3>Press k = Play/Pause</h3>
+        <h3>Press s = Stop</h3>
+        <h3>Press ArrowUp = Volume increase</h3>
+        <h3>Press ArrowDown = Volume descrease</h3>
+        <h3>Press ArrowLeft = Seek back</h3>
+        <h3>Press ArrowRight = Seek right</h3>
+    </div>
+
+
+    <script>
+        window.addEventListener('keydown', function (e) {
+            const p = document.querySelector('.paragraph');
+            const music = document.querySelector('video');
+            console.log(e.key);
+
+            if (e.key == "k") {
+
+                if (music.paused) {
+                    p.classList.add('pressed');
+
+                    p.innerHTML = "Playing at Vol: " + (music.volume);
+                    music.play();
+                }
+                else {
+                    p.classList.remove('pressed');
+
+                    p.innerHTML = "Paused at Vol: " + (music.volume);
+                    music.pause();
+                }
+            }
+            if (e.key == "s") {
+                p.classList.remove('pressed');
+
+                p.innerHTML = "Stop at Vol: " + (music.volume);
+                music.currentTime = 0;
+                music.pause();
+            }
+            if (e.key == "ArrowUp") {
+                music.volume += 0.1;
+            }
+            if (e.key == "ArrowDown") {
+                music.volume -= 0.12;
+            }
+            if (e.key == "ArrowRight") {
+                music.currentTime += 0.5;
+            }
+            if (e.key == "ArrowLeft") {
+                music.currentTime -= 0.5;
+            }
+
+            p.innerHTML = p.innerHTML.split(':')[0] + ": " + music.volume.toFixed(1);
+        })
+    </script>
+</body>
+
+</html>
