@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Controlling using CSS Variables</title>
+
+    <style>
+        html {
+            --bg-color: blueviolet;
+            --spacing: 2px;
+            --blur: 2px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .highlight {
+            color: var(--bg-color);
+        }
+
+        img {
+            background-color: var(--bg-color);
+            width: 400px;
+            height: 500px;
+
+            padding: var(--spacing);
+            filter: blur(var(--blur));
+
+            object-fit: scale-down;
+            object-position: 50% 50%;
+        }
+
+        .controls input{
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Control CSS Variables with <span class="highlight">JS</span></h1>
+
+        <div class="controls">
+            <label for="spacing">Spacing:</label>
+            <input type="range" name="spacing" min="0" max="100" value="10" data-sizing="px">
+            
+            <label for="blur">Blur:</label>
+            <input type="range" name="blur" min="0" max="100" value="10" data-sizing="px">
+            
+            <label for="color">Color:</label>
+            <input type="color" name="bg-color" value="#193549">
+        </div>
+
+        <img src="https://source.unsplash.com/lB6LecQ_ohw/300x400">
+    </div>
+
+    <script>
+        
+        function updateValue() {
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + (this.dataset.sizing || ''));
+        }
+        
+        const inputs = document.querySelectorAll('.controls input');
+        inputs.forEach(input => input.addEventListener('input', updateValue));
+        
+    </script>
+</body>
+
+</html>
