@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Gallery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Amatic SC', cursive;
+            text-transform: uppercase;
+        }
+
+        .panels {
+            display: flex;
+            height: 100vh;
+        }
+
+        .panel {
+            /* background-repeat: no-repeat; */
+            background-size: cover;
+            background-position: 50% 0%;
+            width: 100%;
+            transition: all 0.5s;
+            /* width: 200px; */
+            /* height: 600px; */
+            background-color: black;
+        }
+
+        .panel1 {background-image: url('https://media.comicbook.com/2021/07/naruto-teases-kara-villain-ada-hidden-powers-boruto-60-spoilers-1276643.jpeg?auto=webp&width=1200&height=628&crop=1200:628,smart');}
+        .panel2 {
+            background-position: 50% 20%;
+            background-image: url('https://i.pinimg.com/originals/84/40/41/84404165396403e74eeafe55f27956ec.jpg');}
+        .panel3 {background-image: url('https://otakukart.com/wp-content/uploads/2021/03/114439.jpg');}
+        .panel4 {background-image: url('https://media.comicbook.com/2021/02/boruto-55-spoilers-sasuke-rinnegan-powers-gone-1257497-1280x0.jpeg');}
+        .panel5 {background-image: url('https://a-static.besthdwallpaper.com/kawaki-hd-wallpaper-2560x2048-70582_33.jpg');}
+    </style>
+</head>
+
+<body>
+    <div class="panels">
+        <div class="panel panel1">
+            <p>Let's</p>
+            <p>Save</p>
+            <p>The World</p>
+        </div>
+        <div class="panel panel2">
+            <p>Live</p>
+            <p>Like</p>
+            <p>It's the Last Day</p>
+        </div>
+        <div class="panel panel3">
+            <p>Fulfill</p>
+            <p>Your</p>
+            <p>Dreams</p>
+        </div>
+        <div class="panel panel4">
+            <p>Make your</p>
+            <p>Bonds</p>
+            <p>Everlasting</p>
+        </div>
+        <div class="panel panel5">
+            <p>Never cross</p>
+            <p>On The Line</p>
+            <p>That keeps you sane</p>
+        </div>
+    </div>
+</body>
+
+</html>
