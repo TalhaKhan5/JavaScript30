@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Clock JS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* background-color: blueviolet; */
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock-body {
+            height: 28rem;
+            width: 28rem;
+            border-radius: 100%;
+            border: solid steelblue 1rem;
+            /* rotate: 12deg; */
+        }
+
+        .clock-face {
+            /* height: 3rem; */
+            background-color: aqua;
+            position: relative;
+            top: 50%;
+        }
+
+        .tick {
+            height: 0.5rem;
+            background-color: coral;
+
+            border-radius: 100%;
+            position: absolute;
+            right: 50%;
+
+            transform-origin: 100%;
+            rotate: 90deg;
+            transition: all 0.2s;
+            transition-timing-function: cubic-bezier(.9,1.61,.1,1.01);
+        }
+
+        .hour-hand {
+            width: 8rem;
+        }
+
+
+        .minute-hand {
+            width: 13rem;
+
+        }
+
+        .second-hand {
+            width: 13.4rem;
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock-body">
+        <div class="clock-face">
+            <div class="tick hour-hand"></div>
+            <div class="tick minute-hand"></div>
+            <div class="tick second-hand"></div>
+        </div>
+    </div>
+
+    <script>
+
+        const hour_hand = document.querySelector(".hour-hand");
+        const minute_hand = document.querySelector(".minute-hand");
+        const second_hand = document.querySelector(".second-hand");
+        // second_hand.style.transform = 'rotate(20deg)'
+
+    </script>
+</body>
+
+</html>
