@@ -9,26 +9,52 @@
 
     <style>
         * {
+            --font-size: 1.1em;
+            --transition-open: 0.5s;
+            --transition-active: 0.5s;
             margin: 0;
             padding: 0;
             font-family: 'Amatic SC', cursive;
+            color: white;
+            font-size: var(--font-size);
             text-transform: uppercase;
+        }
+
+        p {
+            text-shadow: 2px 2px 6px black;
+            transition: all var(--transition-active);
+            transition-delay: var(--transition-open);
         }
 
         .panels {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
+            overflow: hidden;
         }
-
+        
         .panel {
-            /* background-repeat: no-repeat; */
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: space-around;
             background-size: cover;
             background-position: 50% 0%;
-            width: 100%;
-            transition: all 0.5s;
-            /* width: 200px; */
-            /* height: 600px; */
-            background-color: black;
+            flex: 1;
+            transition: all var(--transition-open);
+            transition-timing-function: cubic-bezier(.88,2.14,.24,.95);
+        }
+
+        .panel > *:first-child {transform: translateY(-500%);}
+        .panel.open > *:first-child {transform: translateY(0%);}
+        .panel > *:last-child {transform: translateY(500%);}
+        .panel.open > *:last-child {transform: translateY(0%);}
+
+        .panel p:nth-child(2) {
+            font-size: 2.2rem;
+        }
+
+        .panel.open {
+            flex: 5;
         }
 
         .panel1 {background-image: url('https://media.comicbook.com/2021/07/naruto-teases-kara-villain-ada-hidden-powers-boruto-60-spoilers-1276643.jpeg?auto=webp&width=1200&height=628&crop=1200:628,smart');}
@@ -69,6 +95,22 @@
             <p>That keeps you sane</p>
         </div>
     </div>
+
+    <script>
+       const panels = document.querySelectorAll('.panel');
+
+       function openBox() {
+           this.classList.toggle('open');
+       }
+       panels.forEach(panel => panel.addEventListener('click', openBox)); 
+
+    //    function activeBox(e) {
+    //        console.log(e);
+    //        this.classList.toggle('active');
+    //    }
+
+    //    panels.forEach(panel => panel.addEventListener('transitionend', activeBox)); 
+    </script>
 </body>
 
 </html>
