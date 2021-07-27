@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Type Ahead</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: orange;
+        }
+
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3em;
+        }
+
+        input.search {
+            outline: none;
+            border: grey solid 5px;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0rem;
+            text-align: center;
+            font-size: 3em;
+        }
+
+        .suggestions {
+            list-style: none;
+            font-size: 1.2rem;
+        }
+
+        .suggestions li {
+            background-color: white;
+            padding: 10px 40px;
+            box-shadow: 2px 2px 2px black;
+            margin-bottom: 1px;
+        }
+
+        .suggestions li:nth-child(odd) {
+            transform: perspective(100px) rotateX(-5deg) translateY(3px) scale(1.001);
+            background: linear-gradient(to bottom, #EEEEEE 0%, white 100%);
+        }
+        .suggestions li:nth-child(even) {
+            transform: perspective(100px) rotateX(5deg) translateY(2px) scale(1.001);
+        }
+    </style>
+</head>
+
+<body>
+    <form class="search-form">
+        <input class="search" type="text" placeholder="City or State">
+        <ul class="suggestions">
+            <li>Display matching city</li>
+            <li>or state</li>
+        </ul>
+    </form>
+
+    <script>
+        const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+        const cities = [];
+        fetch(endpoint)
+            .then(blob => blob.json())
+            .then(data => cities.push(...data))
+            .catch(e => console.log(e))
+
+        console.log(cities);
+        const search = document.querySelector('.search')
+        const suggestions = document.querySelector('.suggestions')
+
+        function findItem() {
+            const matches = cities.filter(data => {
+                const regEx = new RegExp(this.value, 'gi')
+                return data.city.match(regEx) || data.state.match(regEx)
+            })
+
+            displayMatches(matches)
+        }
+
+        function displayMatches(matched) {
+            const result = matched.map(match => {
+                return `
+            <li><span>${match.city}, ${match.state}</span>
+            <span>${match.population}</span></li>
+            `
+            })    
+
+            suggestions.innerHTML = result.join(''); 
+        }
+
+        search.addEventListener('input', findItem)
+    </script>
+
+</body>
+
+</html>
