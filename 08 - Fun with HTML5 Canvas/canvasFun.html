@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Fun</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="draw" width="800" height="800"></canvas>
+
+    <script>
+        const canvas = document.querySelector('#draw')
+        const ctx = canvas.getContext('2d')
+        canvas.height = window.innerHeight
+        canvas.width = window.innerWidth
+        ctx.lineCap = 'round'
+        ctx.lineJoin = 'round'
+        ctx.lineWidth = 10
+        ctx.globalCompositeOperation = 'multiply'
+        
+        let hue = 10
+        let isDrawing = false
+        let X = 0
+        let Y = 0
+        let sizeSpeed = 1
+        const minSize = 5
+        const maxSize = 200
+
+        function start(e) {
+            [X, Y] = [e.clientX, e.clientY]
+            isDrawing = true
+        }
+        function stop(e) {
+            isDrawing = false
+        }
+        function drawing(e) {
+            if (!isDrawing) return;
+            
+            hue+=3
+            hue = hue > 360 ? 1 : hue
+            ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`
+            if(ctx.lineWidth >= maxSize || ctx.lineWidth <= minSize) sizeSpeed*=-1
+            ctx.lineWidth+=sizeSpeed
+
+            ctx.beginPath();
+            ctx.moveTo(X, Y);
+            ctx.lineTo(e.clientX, e.clientY);
+            ctx.closePath();
+            ctx.stroke();
+            [X, Y] = [e.clientX, e.clientY]
+        }
+
+        window.addEventListener('mousedown', start)
+        window.addEventListener('mousemove', drawing)
+        window.addEventListener('mouseup', stop)
+        window.addEventListener('mouseout', stop)
+    </script>
+</body>
+
+</html>
