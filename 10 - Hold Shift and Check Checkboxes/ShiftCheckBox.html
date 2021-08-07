@@ -8,29 +8,84 @@
     <title>Checking Multiple Boxes using Shift Key</title>
 
     <style>
+        body {
+            background-color: rgb(204, 141, 24);
+            font-size: larger;
+        }
+
+        ul {
+            width: max-content;
+            padding: 0;
+            margin: auto;
+            margin-top: 2rem;
+            border-radius: 5px;
+            box-shadow: 10px 10px 3px rgba(51, 51, 51, 0.11);
+        }
+        
         li {
             display: flex;
+            background-color: white;
+            padding-right: 2rem;
+            cursor: default;
         }
-        input {
-            border-radius: 100%;
+
+        input:checked + p {
+            text-decoration: line-through;
+            color: teal;
+            opacity: 30%;
         }
+
     </style>
 </head>
 
 <body>
     <ul class="checklist">
-        <li><input type="checkbox" name="item-1" id="item-1"><p>Kya baat hai?</p></li>
-        <li><input type="checkbox" name="item-2" id="item-2"><p>Koi tou baat hai</p></li>
-        <li><input type="checkbox" name="item-3" id="item-3"><p>Bonus ki?</p></li>
-        <li><input type="checkbox" name="item-4" id="item-4"><p>World is changing</p></li>
-        <li><input type="checkbox" name="item-5" id="item-5"><p>Do you wanna build a snowman?</p></li>
-        <li><input type="checkbox" name="item-6" id="item-6"><p>Aliens are coming</p></li>
-        <li><input type="checkbox" name="item-7" id="item-7"><p>Pointless point</p></li>
-        <li><input type="checkbox" name="item-8" id="item-8"><p>What a point</p></li>
+        <li>
+            <input type="checkbox">
+            <p>Kya baat hai?</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>Koi tou baat hai</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>Bonus ki?</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>World is changing</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>Do you wanna build a snowman?</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>Aliens are coming</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>Pointless point</p>
+        </li>
+        <li>
+            <input type="checkbox">
+            <p>What a point</p>
+        </li>
     </ul>
 
-<script>
+    <script>
+        const listItems = document.querySelectorAll(".checklist li");
+        const inputs = document.querySelectorAll('.checklist input[type=checkbox]');
+        let lastChecked;
 
-</script>
+        function handleCheck(e) {
+            input = this.querySelector('input');
+            input.checked = !input.checked;
+        }
+
+        listItems.forEach(item => item.addEventListener('click', handleCheck))
+    </script>
 </body>
+
 </html>
