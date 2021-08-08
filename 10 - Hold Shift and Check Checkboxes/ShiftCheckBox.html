@@ -21,20 +21,20 @@
             border-radius: 5px;
             box-shadow: 10px 10px 3px rgba(51, 51, 51, 0.11);
         }
-        
+
         li {
             display: flex;
             background-color: white;
             padding-right: 2rem;
             cursor: default;
+            user-select: none;
         }
 
-        input:checked + p {
+        input:checked+p {
             text-decoration: line-through;
             color: teal;
             opacity: 30%;
         }
-
     </style>
 </head>
 
@@ -77,11 +77,21 @@
     <script>
         const listItems = document.querySelectorAll(".checklist li");
         const inputs = document.querySelectorAll('.checklist input[type=checkbox]');
-        let lastChecked;
+        let lastChecked = undefined;
 
         function handleCheck(e) {
-            input = this.querySelector('input');
-            input.checked = !input.checked;
+            thisInput = this.querySelector('input');
+            thisInput.checked = !thisInput.checked;
+            let isBetween = false;
+
+            if (e.shiftKey && thisInput.checked && lastChecked) {
+                inputs.forEach(input => {
+                    if (input === thisInput || input === lastChecked) isBetween = !isBetween;
+                    if (isBetween) input.checked = true;
+                });
+            }
+
+            if (thisInput.checked) lastChecked = thisInput;
         }
 
         listItems.forEach(item => item.addEventListener('click', handleCheck))
